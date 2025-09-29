@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx react-native:*)",
+      "Bash(npx expo start:*)",
+      "Bash(pkill:*)",
+      "Bash(npx expo r:*)",
+      "Bash(npx expo install:*)",
+      "Read(//d//**)",
+      "Bash(npx create-expo-app:*)",
+      "Bash(taskkill:*)",
+      "Bash(npm install:*)",
+      "Bash(npx expo export:*)",
+      "Bash(npx serve:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,183 @@
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from 'expo-status-bar';
+
+import ExpenseListScreen from './src/screens/ExpenseListScreen';
+import AddExpenseScreen from './src/screens/AddExpenseScreen';
+import EditExpenseScreen from './src/screens/EditExpenseScreen';
+import DashboardScreen from './src/screens/DashboardScreen';
+import CategoryManagementScreen from './src/screens/CategoryManagementScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import CustomDrawerContent from './src/components/CustomDrawerContent';
+
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+
+// Stack Navigator for screens that need to be in a stack
+function MainStackNavigator() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#2196F3',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen
+        name="DashboardMain"
+        component={DashboardScreen}
+        options={{
+          title: 'Expense Manager',
+          headerLeft: () => null, // Remove back button for main screen
+        }}
+      />
+      <Stack.Screen
+        name="AddExpense"
+        component={AddExpenseScreen}
+        options={{ title: 'Add Expense' }}
+      />
+      <Stack.Screen
+        name="EditExpense"
+        component={EditExpenseScreen}
+        options={{ title: 'Edit Expense' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function ExpenseListStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#2196F3',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen
+        name="ExpenseListMain"
+        component={ExpenseListScreen}
+        options={{
+          title: 'All Expenses',
+          headerLeft: () => null,
+        }}
+      />
+      <Stack.Screen
+        name="AddExpense"
+        component={AddExpenseScreen}
+        options={{ title: 'Add Expense' }}
+      />
+      <Stack.Screen
+        name="EditExpense"
+        component={EditExpenseScreen}
+        options={{ title: 'Edit Expense' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <StatusBar style="auto" />
+      <Drawer.Navigator
+        initialRouteName="Dashboard"
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        screenOptions={{
+          headerShown: false, // We'll handle headers in individual stacks
+          drawerActiveTintColor: '#2196F3',
+          drawerInactiveTintColor: '#666',
+        }}
+      >
+        <Drawer.Screen
+          name="Dashboard"
+          component={MainStackNavigator}
+          options={{
+            drawerLabel: 'Dashboard',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#2196F3',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Drawer.Screen
+          name="ExpenseList"
+          component={ExpenseListStack}
+          options={{
+            drawerLabel: 'All Expenses',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#2196F3',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Drawer.Screen
+          name="AddExpense"
+          component={AddExpenseScreen}
+          options={{
+            drawerLabel: 'Add Expense',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#2196F3',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            title: 'Add Expense',
+          }}
+        />
+        <Drawer.Screen
+          name="CategoryManagement"
+          component={CategoryManagementScreen}
+          options={{
+            drawerLabel: 'Manage Categories',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#2196F3',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            title: 'Manage Categories',
+          }}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            drawerLabel: 'My Profile',
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#2196F3',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            title: 'My Profile',
+          }}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
